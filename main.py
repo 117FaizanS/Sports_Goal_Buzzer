@@ -1,6 +1,10 @@
 import requests
 import time
 from datetime import date
+import pyfirmata
+
+# Python Configuration
+board = pyfirmata.Arduino('/dev/ttyACM0')
 
 # 🧾 Configuration
 team_to_track = "Edmonton Oilers"
@@ -73,6 +77,11 @@ while True:
             print(f"📊 Score: {away_score} - {home_score}\n")
 
             # 👉 Trigger event (e.g., light/LED) when your team scores here
+            for x in range(3):
+                board.digital[13].write(1)
+                time.sleep(1)
+                board.digital[13].write(0)
+                time.sleep(1)
 
             last_home_score = home_score
             last_away_score = away_score
