@@ -4,8 +4,8 @@ from datetime import date
 import pyfirmata2
 
 # Python Configuration
-board = pyfirmata2.Arduino('/dev/COM7')
-LED_pin = board.get_pin('d:13:o')
+board = pyfirmata2.Arduino('COM7')
+LED_pin = board.get_pin('d:8:o')
 
 # 🧾 Configuration
 team_to_track = "Edmonton Oilers"
