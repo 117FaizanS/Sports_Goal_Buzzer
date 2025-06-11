@@ -80,9 +80,9 @@ while True:
             # 👉 Trigger event (e.g., light/LED) when your team scores here
             for i in range(10): # Loop to blink the micro-led
                 LED_pin.write(255) # Turn on the led
-                time.sleep(5) # Delay
+                time.sleep(1) # Delay
                 LED_pin.write(0) # Turn off the led
-                time.sleep(3) # Delay
+                time.sleep(1) # Delay
 
             last_home_score = home_score
             last_away_score = away_score
