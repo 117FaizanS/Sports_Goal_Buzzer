@@ -5,7 +5,7 @@ import pyfirmata2
 
 # Python Configuration
 board = pyfirmata2.Arduino('COM7')
-LED_pin = board.get_pin('d:8:o')
+LED_pin = board.get_pin('a:8:o')
 
 # 🧾 Configuration
 team_to_track = "Edmonton Oilers"
@@ -79,9 +79,9 @@ while True:
 
             # 👉 Trigger event (e.g., light/LED) when your team scores here
             for i in range(10): # Loop to blink the micro-led
-                LED_pin.write(True) # Turn on the led
+                LED_pin.write(255) # Turn on the led
                 time.sleep(5) # Delay
-                LED_pin.write(False) # Turn off the led
+                LED_pin.write(0) # Turn off the led
                 time.sleep(3) # Delay
 
             last_home_score = home_score
