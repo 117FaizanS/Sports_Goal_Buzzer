@@ -3,11 +3,12 @@ import time
 from datetime import date
 import pyfirmata2
 
-# Python Configuration
+# Python Config
+# TODO add speaker config for goal horns
 board = pyfirmata2.Arduino('COM7')
 LED_pin = board.get_pin('a:8:o')
 
-# 🧾 Configuration
+# Team selection
 team_to_track = "Edmonton Oilers"
 check_interval = 5  # seconds
 today = date.today().strftime("%Y-%m-%d")
