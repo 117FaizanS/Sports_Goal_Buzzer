@@ -13,7 +13,7 @@ team_to_track = "Edmonton Oilers"
 check_interval = 5  # seconds
 today = date.today().strftime("%Y-%m-%d")
 
-# Step 1: Get today's scheduled games
+# Get today's scheduled games
 schedule_url = f"https://api-web.nhle.com/v1/schedule/{today}"
 resp = requests.get(schedule_url)
 
@@ -28,7 +28,7 @@ for day in resp.json().get("gameWeek", []):
         games = day["games"]
         break
 
-# Step 2: Find your team's game
+# Find selected team's game
 game_id = None
 for game in games:
     home = game["homeTeam"]["placeName"]["default"] + " " + game["homeTeam"]["commonName"]["default"]
@@ -45,7 +45,6 @@ if not game_id:
     print("❌ No game found for your team today.")
     exit()
 
-# Step 3: Real-time loop
 box_url = f"https://api-web.nhle.com/v1/gamecenter/{game_id}/boxscore"
 
 print("\n🔁 Starting live score tracking...\n")
@@ -53,6 +52,7 @@ print("\n🔁 Starting live score tracking...\n")
 last_home_score = -1
 last_away_score = -1
 
+# Loop continuously to check scores and trigger buzzer
 while True:
     try:
         box_resp = requests.get(box_url)
@@ -78,13 +78,15 @@ while True:
             print(f"📢 {away_team} @ {home_team} | {game_state}")
             print(f"📊 Score: {away_score} - {home_score}\n")
 
-            # 👉 Trigger event (e.g., light/LED) when your team scores here
-            for i in range(10): # Loop to blink the micro-led
-                LED_pin.write(255) # Turn on the led
-                time.sleep(1) # Delay
-                LED_pin.write(0) # Turn off the led
-                time.sleep(1) # Delay
+            # Arduino triggers for goal
+            # TODO make a function?
+            for i in range(6):
+                LED_pin.write(255)
+                time.sleep(0.5)
+                LED_pin.write(0)
+                time.sleep(0.5)
 
+            # Update Scores
             last_home_score = home_score
             last_away_score = away_score
 
