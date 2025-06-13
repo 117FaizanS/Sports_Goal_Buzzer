@@ -45,7 +45,6 @@ if not game_id:
     print("❌ No game found for your team today.")
     exit()
 
-# Loop continuously to update scores
 box_url = f"https://api-web.nhle.com/v1/gamecenter/{game_id}/boxscore"
 
 print("\n🔁 Starting live score tracking...\n")
