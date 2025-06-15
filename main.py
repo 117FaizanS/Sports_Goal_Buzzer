@@ -81,10 +81,13 @@ while True:
             # Arduino triggers for goal
             # TODO make a function?
             for i in range(6):
-                LED_pin.write(255)
-                time.sleep(0.5)
-                LED_pin.write(0)
-                time.sleep(0.5)
+                for j in range(256):
+                    LED_pin.write(j)
+                    time.sleep(0.002)
+
+                for j in range(255, -1, -1):
+                    LED_pin.write(j)
+                    time.sleep(0.002)
 
             # Update Scores
             last_home_score = home_score
